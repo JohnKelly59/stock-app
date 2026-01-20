@@ -1,60 +1,100 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Batcomputer Stock App
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Tech Stack
 
-## About Laravel
+* **Backend:** Laravel 12 (PHP 8.2+)
+* **Frontend:** React 18, Inertia.js
+* **Styling:** Tailwind CSS, Material UI (MUI)
+* **Database:** PostgreSQL
+* **Authentication:** Laravel Breeze
+* **Testing:** PHPUnit
+* **External API:** Finnhub.io
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Prerequisites
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* **PHP 8.2** or higher
+* **Composer** (PHP Dependency Manager)
+* **Node.js & npm** (JavaScript Runtime)
+* **PostgreSQL** (Database Server)
+* **Git**
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Installation Guide
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Clone the Repository
 
-## Laravel Sponsors
+### 2. Install Backend Dependencies
+```bash
+composer install
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 3. Install Frontend Dependencies
+```bash
+npm install
+```
 
-### Premium Partners
+### 4. Configure Environment
+Duplicate the example environment file and open it for configuration:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+cp .env.example .env
+```
+Open `.env` in your text editor and update the following:
 
-## Contributing
+A. Database Connection: Set this to match your local PostgreSQL credentials.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```ini
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=stock_app
+DB_USERNAME=your_postgres_user
+DB_PASSWORD=your_postgres_password
+```
 
-## Code of Conduct
+B. Add your Finnhub API key.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```ini
+FINNHUB_API_KEY=your_api_key_here
+```
 
-## Security Vulnerabilities
+### 5. Generate Application Key
+```bash
+php artisan key:generate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 6. Setup the Database
+Ensure your PostgreSQL server is running and you have created an empty database named `stock_app`. Then run the migrations:
 
-## License
+```bash
+php artisan migrate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# stock-app
+## Running the Application
+You need two terminal windows open to run the application locally.
+
+Terminal 1: Frontend (Vite) Compiles React assets and handles hot-reloading.
+
+```bash
+npm run dev
+```
+
+Terminal 2: Backend (Laravel) Starts the local development server.
+
+```bash
+php artisan serve
+```
+
+Access the App: Open your secure link: http://localhost:8000
+
+## Running Tests
+Note: If you are on Linux/WSL, ensure you have the php-sqlite3 driver installed.
+
+Run the tests:
+
+```bash
+php artisan test
+```
